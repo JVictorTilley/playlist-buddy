@@ -86,7 +86,7 @@ const SongCard = ({ song, accessToken, status }) => {
           </TrackText>
         </TrackInfo>
       ) : (
-        <h1>Loading Track...</h1>
+        <p>Track unavailable. Check if you're logged in!</p>
       )}
     </Wrapper>
   );

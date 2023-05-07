@@ -4,6 +4,7 @@ import SpotifyWebApi from "spotify-web-api-node";
 
 //The bread and butter for Spotify integration.
 //Could definitely use optimizing.
+//Should probably be a Context provider, but it's currently its own hook.
 const useAuth = (authCode) => {
   const [accessToken, setAccessToken] = useState(null);
   const [refreshToken, setRefreshToken] = useState(null);
@@ -53,6 +54,7 @@ const useAuth = (authCode) => {
       //Since we're redirecting to home right after, the state updates might be redundant.
       //Session storage will give us everything we need.
       else if (authCode && status === "retrieving") {
+        console.log(authCode);
         fetch("/login", {
           method: "POST",
           headers: {
@@ -63,16 +65,18 @@ const useAuth = (authCode) => {
         })
           .then((res) => res.json())
           .then((data) => {
-            setAccessToken(data.accessToken);
-            setRefreshToken(data.refreshToken);
-            setExpiresIn(data.expiresIn);
-
-            window.sessionStorage.setItem("accessToken", data.accessToken);
-            window.sessionStorage.setItem("refreshToken", data.refreshToken);
-            window.sessionStorage.setItem("expiresIn", data.expiresIn);
-
-            setStatus("logged_in");
-            nav("/");
+            console.log(data);
+            if (data.accessToken) {
+              console.log("SETTING TOKENS");
+              setAccessToken(data.accessToken);
+              setRefreshToken(data.refreshToken);
+              setExpiresIn(data.expiresIn);
+              window.sessionStorage.setItem("accessToken", data.accessToken);
+              window.sessionStorage.setItem("refreshToken", data.refreshToken);
+              window.sessionStorage.setItem("expiresIn", data.expiresIn);
+              setStatus("logged_in");
+              nav("/");
+            }
           })
           .catch((err) => {
             console.log(err.message);

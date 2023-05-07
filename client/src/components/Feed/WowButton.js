@@ -7,19 +7,21 @@ const WowButton = ({ postId, setFeedStatus }) => {
   const { currentUser } = useAuth();
 
   const handleClick = () => {
-    fetch(`/post/${postId}/rate`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        rating: 1,
-        ratedBy: currentUser.id,
-      }),
-    })
-      .then((res) => res.json())
-      .then((resJson) => {
-        if (resJson.status === 200) setFeedStatus("Retrieving");
-        else console.log(resJson.message);
-      });
+    if (currentUser) {
+      fetch(`/post/${postId}/rate`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          rating: 1,
+          ratedBy: currentUser.id,
+        }),
+      })
+        .then((res) => res.json())
+        .then((resJson) => {
+          if (resJson.status === 200) setFeedStatus("Retrieving");
+          else console.log(resJson.message);
+        });
+    }
   };
 
   return <Wrapper onClick={handleClick}>WOW!</Wrapper>;

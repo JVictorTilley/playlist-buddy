@@ -11,8 +11,6 @@ import Playlist from "./Playlist/Playlist";
 import TagPage from "./Tag/TagPage";
 import InfoPolicy from "./InfoPolicy";
 
-const authCode = new URLSearchParams(window.location.search).get("code");
-
 const App = () => {
   return (
     <BrowserRouter>
@@ -21,7 +19,7 @@ const App = () => {
       <Footer />
       <ContentContainer>
         <Routes>
-          <Route path="/" element={<HomePage authCode={authCode} />} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/profile/:profileId" element={<ProfilePage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/song/:spotId" element={<Song />} />

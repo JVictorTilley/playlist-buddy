@@ -6,9 +6,11 @@ import SongCard from "./SongCard/SongCard";
 
 //Homepage displays the newsfeed.
 //Homepage is also the page that delivers the auth code to useAuth.
-const HomePage = ({ authCode }) => {
+const HomePage = () => {
   const [recentTracks, setRecentTracks] = useState([]);
   const [trackState, setTrackState] = useState("retrieving");
+
+  const authCode = new URLSearchParams(window.location.search).get("code");
   const { currentUser, accessToken, status } = useAuth(authCode);
 
   useEffect(() => {

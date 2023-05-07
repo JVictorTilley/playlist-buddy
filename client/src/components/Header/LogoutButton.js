@@ -11,7 +11,7 @@ const LogOutButton = () => {
         window.sessionStorage.removeItem("refreshToken");
         window.sessionStorage.removeItem("expiresIn");
 
-        nav("/");
+        window.location.reload();
       }}
     >
       Log Out

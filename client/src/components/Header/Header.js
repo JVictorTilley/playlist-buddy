@@ -3,17 +3,36 @@ import LoginButton from "./LoginButton";
 import LogOutButton from "./LogoutButton";
 import useAuth from "../Hooks/useAuth";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 //Main link area + logging in/out.
+
 const Header = () => {
+  const [me, setMe] = useState(null);
+  const [headerStatus, setHeaderStatus] = useState("retrieving");
   const authInfo = useAuth();
+
+  useEffect(() => {
+    if (authInfo.status === "logged_in") setMe(authInfo.currentUser);
+    else setMe(-1);
+
+    if (me) setHeaderStatus("ready");
+  }, [authInfo, me]);
+
   return (
     <Wrapper>
       <Link to="/">
         <TitleText>playlist-buddy</TitleText>
       </Link>
-      <LinkText to="/profile">my profile</LinkText>
-      {authInfo.status === "logged_in" ? <LogOutButton /> : <LoginButton />}
+      {headerStatus === "ready" && (
+        <>
+          {" "}
+          <LinkText to="/profile">
+            {me != -1 ? <>{`${me.display_name}'s profile`}</> : "Hello!"}
+          </LinkText>
+          {authInfo.status === "logged_in" ? <LogOutButton /> : <LoginButton />}
+        </>
+      )}
     </Wrapper>
   );
 };
