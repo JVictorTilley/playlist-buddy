@@ -26,11 +26,18 @@ const Header = () => {
       </Link>
       {headerStatus === "ready" && (
         <>
-          {" "}
           <LinkText to="/profile">
-            {me != -1 ? <>{`${me.display_name}'s profile`}</> : "Hello!"}
+            {authInfo.currentUser ? (
+              <>{`${authInfo.currentUser.display_name}'s profile`}</>
+            ) : (
+              "Hello!"
+            )}
           </LinkText>
-          {authInfo.status === "logged_in" ? <LogOutButton /> : <LoginButton />}
+          {window.sessionStorage.getItem("accessToken") ? (
+            <LogOutButton />
+          ) : (
+            <LoginButton />
+          )}
         </>
       )}
     </Wrapper>
