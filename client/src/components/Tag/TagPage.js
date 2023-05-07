@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import styled from "styled-components";
 
 //Displaying a tag's info and the list of tracks using it.
@@ -47,7 +47,9 @@ const TagPage = () => {
             {songs.map((song) => {
               return (
                 <li key={song._id}>
-                  {song.name} - {song.artists[0]}{" "}
+                  <TitleLink to={`/song/${song.spotify_id}`}>
+                    {song.name} - {song.artists[0]}
+                  </TitleLink>{" "}
                   {checkRatingUsers(song) &&
                     ` - Rated By: ${checkRatingUsers(song)}`}
                 </li>
@@ -67,6 +69,10 @@ const Wrapper = styled.div``;
 const TagType = styled.p`
   font-size: 16px;
   opacity: 75%;
+  color: var(--primary-colour);
+`;
+
+const TitleLink = styled(Link)`
   color: var(--primary-colour);
 `;
 
