@@ -34,19 +34,23 @@ const HomePage = () => {
       )}
       <HomeHeading>The latest tracks:</HomeHeading>
       <LatestTracksSection>
-        {recentTracks.length > 0 ? (
-          recentTracks.map((song) => {
-            return (
-              <SongCard
-                key={song._id}
-                song={song}
-                accessToken={accessToken}
-                status={status}
-              />
-            );
-          })
+        {currentUser ? (
+          recentTracks.length > 0 ? (
+            recentTracks.map((song) => {
+              return (
+                <SongCard
+                  key={song._id}
+                  song={song}
+                  accessToken={accessToken}
+                  status={status}
+                />
+              );
+            })
+          ) : (
+            <h2>Getting tracks...</h2>
+          )
         ) : (
-          <h2>Getting tracks...</h2>
+          <p>Log in to view tracks!</p>
         )}
       </LatestTracksSection>
 

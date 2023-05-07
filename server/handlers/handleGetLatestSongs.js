@@ -18,7 +18,7 @@ const handleGetLatestSongs = async (req, res) => {
       .collection("songs")
       .find()
       .sort({ _id: -1 })
-      .limit(4)
+      .limit(6)
       .toArray();
 
     if (result.length) {

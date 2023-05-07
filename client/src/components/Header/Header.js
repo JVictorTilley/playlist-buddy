@@ -27,11 +27,7 @@ const Header = () => {
       {headerStatus === "ready" && (
         <>
           <LinkText to="/profile">
-            {authInfo.currentUser ? (
-              <>{`${authInfo.currentUser.display_name}'s profile`}</>
-            ) : (
-              "Hello!"
-            )}
+            {me.currentUser ? <>{`${me.display_name}'s profile`}</> : "Hello!"}
           </LinkText>
           {window.sessionStorage.getItem("accessToken") ? (
             <LogOutButton />

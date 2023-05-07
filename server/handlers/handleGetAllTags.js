@@ -14,7 +14,11 @@ const handleGetAllTags = async (req, res) => {
     await client.connect();
     const db = client.db();
 
-    const result = await db.collection("tags").find().toArray();
+    const result = await db
+      .collection("tags")
+      .find()
+      .sort({ type: 1 })
+      .toArray();
 
     if (result.length) {
       return res

@@ -95,6 +95,7 @@ const SongCard = ({ song, accessToken, status }) => {
 const Wrapper = styled.div`
   width: 500px;
   border: 3px solid var(--primary-colour);
+  box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.33);
 `;
 
 const TrackInfo = styled.div`

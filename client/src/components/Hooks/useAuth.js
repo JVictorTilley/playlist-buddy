@@ -24,7 +24,7 @@ const useAuth = (authCode) => {
   //1. Check if we have an access token, refresh token, and expiry in storage. If so, grab it and set to state.
   //2. If we're looking for an access token AND we have an auth code ready, fetch a new token with the auth code.
   useEffect(() => {
-    if (status != "logged_in") {
+    if (status !== "logged_in") {
       const checkToken = window.sessionStorage.getItem("accessToken");
       const checkRefresh = window.sessionStorage.getItem("refreshToken");
       const checkExpires = window.sessionStorage.getItem("expiresIn");
@@ -75,7 +75,7 @@ const useAuth = (authCode) => {
               window.sessionStorage.setItem("refreshToken", data.refreshToken);
               window.sessionStorage.setItem("expiresIn", data.expiresIn);
               setStatus("logged_in");
-              nav("/");
+              nav("/profile");
             }
           })
           .catch((err) => {

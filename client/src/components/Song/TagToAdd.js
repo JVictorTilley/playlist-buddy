@@ -34,7 +34,7 @@ const Wrapper = styled.div`
       case "vocals":
         return "purple";
       case "instrument":
-        return "yellow";
+        return "orange";
       case "vibe":
         return "pink";
       default:
