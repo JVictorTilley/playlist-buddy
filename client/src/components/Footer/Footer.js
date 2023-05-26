@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import spotifyWhite from "../../assets/Spotify_Logo_RGB_White.png";
+import { Link } from "react-router-dom";
 
 //Footer links to Spotify.
 //Using the official Spotify SDK assets. Doing my best to follow style guidelines.
@@ -11,6 +12,7 @@ const Footer = () => {
       <SpotifyLink href="https://open.spotify.com/">
         <SpotifyLogoWhite src={spotifyWhite} alt="Spotify" />
       </SpotifyLink>
+      <PolicyLink to="/policy">Data Policy</PolicyLink>
     </Wrapper>
   );
 };
@@ -39,6 +41,11 @@ const SpotifyLogoWhite = styled.img`
 
 const SpotifyLink = styled.a`
   height: 60%;
+`;
+
+const PolicyLink = styled(Link)`
+  font-size: 20px;
+  color: white;
 `;
 
 export default Footer;
